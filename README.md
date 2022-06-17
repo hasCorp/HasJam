@@ -1,38 +1,36 @@
-# create-svelte
+# HasJam
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Website of the Hascord #stem-comp-sci hackathons.
 
-## Creating a project
+## Environment Variables
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Head over to https://supabase.com/ and create an account and project
+- Create a `.env` file with the necessary info based on the outline provided in `sample.env`
 
-```bash
-# create a new project in the current directory
-npm init svelte
+## Run Locally
 
-# create a new project in my-app
-npm init svelte my-app
-```
+Install the latest [Node.js](https://nodejs.org/en/) version for your operating system
 
-## Developing
+Clone the project
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+ ```bash
+ git clone git@github.com:Figments/hasjam.git
+ ```
 
-```bash
-npm run dev
+Go to the project directory
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+ ```bash
+ cd hasjam
+ ```
 
-## Building
+Install dependencies
 
-To create a production version of your app:
+ ```bash
+ yarn install
+ ```
 
-```bash
-npm run build
-```
+Start the server
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+ ```bash
+ yarn run dev
+ ```
