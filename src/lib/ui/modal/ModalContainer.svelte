@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { scale, fade } from 'svelte/transition';
+    import { scale, fade, fly } from 'svelte/transition';
     import { modal, close } from './modal.state';
+    import Container from '../util/Container.svelte';
 </script>
 
 {#if $modal.isOpen}
@@ -15,7 +16,13 @@
             {/if}
         </div>
         <div class="popup-container" transition:scale={{ delay: 0, duration: 200 }}>
-            <svelte:component this={$modal.component} />
+            {#key $modal.currPage}
+                <div in:fly={{ delay: 0, duration: 200, x: -200 }}>
+                    <Container>
+                        <svelte:component this={$modal.components[$modal.currPage]} />
+                    </Container>
+                </div>
+            {/key}
         </div>
     </div>
 {/if}

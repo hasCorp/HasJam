@@ -53,7 +53,6 @@
 <style lang="scss">
   button, a {
     @apply flex items-center p-2 transition transform focus:ring-0 m-0 text-sm rounded-lg select-none font-medium;
-    font-family: 'Fira Code', serif;
     &.primary,
     &.active {
       @apply text-white bg-orange-600;

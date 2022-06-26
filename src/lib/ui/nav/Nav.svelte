@@ -3,7 +3,7 @@
     import { LoginBoxLine, UserAddLine } from "svelte-remixicon";
     import { Button } from "../util";
     import { open } from "../modal";
-    import { LoginForm } from "../../forms/auth";
+    import { LoginForm, SignUpForm } from "../../forms/auth";
 </script>
 
 <nav class="flex items-center h-16 sticky top-0 z-50 border-l-8 border-orange-600 px-4 drop-shadow-lg mb-6">
@@ -19,7 +19,7 @@
             <span class="button-text">Log In</span>
         </Button>
         <div class="mx-1"></div>
-        <Button kind="primary">
+        <Button kind="primary" on:click={() => open(SignUpForm)}>
             <UserAddLine class="button-icon" />
             <span class="button-text">Sign Up</span>
         </Button>
