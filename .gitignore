@@ -7,4 +7,3 @@ DerivedData/
 db.sqlite
 .swiftpm
 .env
-.DS_Store
