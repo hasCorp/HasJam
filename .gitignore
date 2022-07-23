@@ -1,8 +1,10 @@
+Packages
+.build
+xcuserdata
+*.xcodeproj
+DerivedData/
 .DS_Store
-node_modules
-/build
-/.svelte-kit
-/package
+db.sqlite
+.swiftpm
 .env
-.env.*
-!.env.example
+.DS_Store
