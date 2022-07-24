@@ -1,10 +1,15 @@
 import Fluent
 import FluentPostgresDriver
 import Vapor
+import JWT
 
 // configures your application
 public func configure(_ app: Application) throws {
     app.logger.notice("Starting hasJam API...")
+
+    // Setting up JWT signing
+    app.logger.notice("Assigning secret key...")
+    app.jwt.signers.use(.hs256(key: Environment.get("JWT_SECRET") ?? "aSecret"))
 
     // Establishing DB Connection
     app.logger.notice("Establishing database connection...")
