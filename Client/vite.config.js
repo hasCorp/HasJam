@@ -10,6 +10,9 @@ const config = {
 				additionalData: '@use "src/variables.scss" as *;'
 			}
 		}
+	},
+	server: {
+		port: 3000
 	}
 };
 

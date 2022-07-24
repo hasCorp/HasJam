@@ -21,10 +21,7 @@ volumes:
 
 x-shared_environment: &shared_environment
   LOG_LEVEL: ${LOG_LEVEL:-debug}
-  DATABASE_HOST: db
-  DATABASE_NAME: vapor_database
-  DATABASE_USERNAME: vapor_username
-  DATABASE_PASSWORD: vapor_password
+  POSTGRES_URL: "postgresql://vapor_username:vapor_password@localhost:5432/hasjam"
   
 services:
   app:
@@ -69,6 +66,6 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: vapor_username
       POSTGRES_PASSWORD: vapor_password
-      POSTGRES_DB: vapor_database
+      POSTGRES_DB: hasjam
     ports:
       - '5432:5432'

@@ -4,19 +4,50 @@ import Vapor
 
 // configures your application
 public func configure(_ app: Application) throws {
-    // uncomment to serve files from /Public folder
-    // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    app.logger.notice("Starting hasJam API...")
 
-    app.databases.use(.postgres(
-        hostname: Environment.get("DATABASE_HOST") ?? "localhost",
-        port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? PostgresConfiguration.ianaPortNumber,
-        username: Environment.get("DATABASE_USERNAME") ?? "vapor_username",
-        password: Environment.get("DATABASE_PASSWORD") ?? "vapor_password",
-        database: Environment.get("DATABASE_NAME") ?? "vapor_database"
-    ), as: .psql)
+    // Establishing DB Connection
+    app.logger.notice("Establishing database connection...")
+    let databaseUrl = Environment.get("POSTGRES_URL") ?? "postgresql://postgres@localhost/hasjam"
+    try app.databases.use(.postgres(url: databaseUrl), as: .psql)
 
-    app.migrations.add(CreateTodo())
+    // Establishing migrations for `vapor run migrate`
+    app.logger.notice("Adding migrations...")
+    app.migrations.add(CreateUser())
+    app.migrations.add(CreateSession())
 
-    // register routes
+    // CORS configuration
+    app.logger.notice("Assigning CORS configuration...")
+    let corsConfiguration = CORSMiddleware.Configuration(
+        allowedOrigin: CORSMiddleware.AllowOriginSetting.any([
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "https://hasjam.dev",
+            "https://www.hasjam.dev",
+        ]),
+        allowedMethods: [.GET, .POST, .PUT, .PATCH, .OPTIONS],
+        allowedHeaders: [
+            .accept,
+            .authorization,
+            .contentType,
+            .origin,
+            .xRequestedWith,
+            .userAgent,
+            .accessControlAllowOrigin
+        ]
+    )
+    let cors = CORSMiddleware(configuration: corsConfiguration)
+    app.middleware.use(cors, at: .beginning)
+
+    // Register routes
+    app.logger.notice("Acknowledging routes...")
     try routes(app)
+
+    // Show all routes
+    for route in app.routes.all {
+        let pathArr = route.path.map { item in
+            String(item.description)
+        }
+        app.logger.info("Route acknowledged: /\(pathArr.joined(separator: "/"))")
+    }
 }

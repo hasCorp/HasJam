@@ -11,6 +11,9 @@ let package = Package(
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.4.0"),
+        .package(url: "https://github.com/vapor/jwt.git", from: "4.0.0"),
+        .package(url: "https://github.com/tmthecoder/Argon2Swift.git", branch: "main"),
+        .package(url: "https://github.com/malcommac/UAParserSwift.git", from: "1.0.1")
     ],
     targets: [
         .target(
@@ -18,7 +21,10 @@ let package = Package(
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
-                .product(name: "Vapor", package: "vapor")
+                .product(name: "Vapor", package: "vapor"),
+                .product(name: "JWT", package: "jwt"),
+                .product(name: "Argon2Swift", package: "Argon2Swift"),
+                .product(name: "UAParserSwift", package: "UAParserSwift")
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of
