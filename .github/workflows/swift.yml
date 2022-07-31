@@ -12,6 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build
-      run: swift build -v
+      run: swift build -c debug --static-swift-stdlib
     - name: Run tests
       run: swift test -v
