@@ -8,9 +8,12 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
+    - uses: swift-actions/setup-swift@v1
     - uses: actions/checkout@v3
+    - name: Swift Version
+      run: swift --version
     - name: Build
       run: swift build -c debug --static-swift-stdlib
     - name: Run tests
